@@ -51,7 +51,7 @@ pipeline {
                 sh 'bandit -r app -f txt -o bandit-report.txt || true'
 
                 recordIssues(
-                    tools: [pyLint(pattern: 'bandit-report.txt')]
+                    tools: [pyLint(pattern: 'bandit-report.txt')],
                     qualityGates: [
                         [threshold: 2, type: 'TOTAL', unstable: true],
                         [threshold: 4, type: 'TOTAL', failed: true]
