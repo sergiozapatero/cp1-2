@@ -70,7 +70,11 @@ pipeline {
                 sh 'jmeter -n -t performance/test.jmx -l result.jtl'
             }
         }
-
+	post {
+            always {
+            	perfReport sourceDataFiles: 'result.jtl'
+            }
+    	}
         stage('Coverage') {
             steps {
                 sh '''
