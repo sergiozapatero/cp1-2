@@ -78,8 +78,14 @@ pipeline {
     }
 
     post {
-        always {
-            perfReport sourceDataFiles: 'result.jtl'
+    always {
+        script {
+            if (fileExists('result.jtl')) {
+                perfReport sourceDataFiles: 'result.jtl'
+            } else {
+                echo "Skipping perfReport: no JTL generated"
+            }
         }
     }
+}
 }
