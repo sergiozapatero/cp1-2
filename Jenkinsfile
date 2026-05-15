@@ -6,7 +6,6 @@ pipeline {
         stage('Get Code') {
             steps {
                 git 'https://github.com/sergiozapatero/cp1-2.git'
-
                 sh 'pwd'
                 sh 'ls -l'
             }
@@ -70,12 +69,7 @@ pipeline {
                 sh 'jmeter -n -t performance/test.jmx -l result.jtl'
             }
         }
-	post {
-            always {
-            	perfReport sourceDataFiles: 'result.jtl'
-            }
-    	}
-}
+
         stage('Coverage') {
             steps {
                 sh '''
@@ -84,6 +78,12 @@ pipeline {
                 coverage report
                 '''
             }
+        }
+    }
+
+    post {
+        always {
+            perfReport sourceDataFiles: 'result.jtl'
         }
     }
 }
