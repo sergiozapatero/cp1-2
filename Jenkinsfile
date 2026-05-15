@@ -75,6 +75,7 @@ pipeline {
             	perfReport sourceDataFiles: 'result.jtl'
             }
     	}
+}
         stage('Coverage') {
             steps {
                 sh '''
